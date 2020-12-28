@@ -8,6 +8,10 @@ const initialState = {
 	currentAnimal: {},
 	animals: {},
 	query: {},
+	fetchingAnimals: false,
+	searching: false,
+	searchError: "",
+	fetchingAnimalsError: "",
 };
 
 const reducer = (state, action) => {
@@ -24,16 +28,21 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				query: action.payload.query,
+				searching: true,
 			};
 		case constants.SEARCH_ANIMAL_SUCCESS:
 			return {
 				...state,
 				searchResults: action.payload.response,
-				page: 'RESULTS'
+				page: 'RESULTS',
+				searching: false,
 			};
 		case constants.SEARCH_ANIMAL_FAILURE:
 			return {
-				searchError: action.payload.error
+				...state,
+				searchError: action.payload.error,
+				searchResults: [],
+				searching: false,
 			};
 		case constants.GET_ANIMALS_REQUEST:
 			return {

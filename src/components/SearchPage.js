@@ -10,6 +10,10 @@ import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import {StoreContext} from "../store";
 import {getAnimals, searchAnimal} from "../actions/animal";
+import Typography from "@material-ui/core/Typography";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import ReplayOutlinedIcon from '@material-ui/icons/ReplayOutlined';
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = theme => ({
 	paper: {
@@ -105,56 +109,91 @@ class SearchPage extends React.Component {
 		}
 	};
 
+	reloadPage = () => {
+		window.location.reload();
+	};
+
+	isLoading = () => {
+		return this.context.state.fetchingAnimals || this.context.state.searching
+	};
+
+	getErrorMessage = () => {
+		if (this.context.state.fetchingAnimalsError !== "") {
+			return 'GET ANIMAL ' + this.context.state.fetchingAnimalsError;
+		} else if (this.context.state.searchError) {
+			return 'SEARCH ' + this.context.state.searchError;
+		}
+	};
+
 	render() {
 		const animals = this.context.state.animals;
 		const { classes } = this.props;
 		return (
-			<Grid item>
-				<Paper square={true} className={classes.paper} elevation={2}>
-					<Grid container direction={"column"}>
-						<TextField
-							error={this.state.maxAgeChanged && !this.state.maxAgeValid}
-							name='maxAge'
-							onChange={this.handleChange}
-							className={classes.input}
-							label="Max Age"
-							size={"small"}
-							type="number"
-							variant="outlined" />
-						<TextField
-							error={this.state.locationChanged && !this.state.locationValid}
-							name='location'
-							onChange={this.handleChange}
-							className={classes.input}
-							label="Location"
-							size={"small"}
-							type="text"
-							variant="outlined" />
-						<FormControl error={this.state.animalChanged && !this.state.animalValid}
-									 size="small" variant="outlined" className={classes.input}>
-							<InputLabel>Animal</InputLabel>
-							<Select value={this.state.animal} defaultValue="" name="animal" onChange={this.handleChange} label="Animal">
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								{this.getAnimalMenuItems(Object.keys(animals))}
-							</Select>
-						</FormControl>
-						<FormControl error={this.state.breedChanged && !this.state.breedValid} size="small" variant="outlined" className={classes.input}>
-							<InputLabel id="breed">Breed</InputLabel>
-							<Select value={this.state.breed} defaultValue="" name="breed" labelId="breed" label="Breed" onChange={this.handleChange}>
-								<MenuItem value="">
-									<em>None</em>
-								</MenuItem>
-								{this.getBreedsMenuItems(animals)}
-							</Select>
-						</FormControl>
-						<Button onClick={this.submitForm} disabled={!this.isFormValid()} variant="contained" color="primary">
-							Submit
-						</Button>
+			this.getErrorMessage() === "" ? (
+					<Grid item>
+						{this.isLoading() ? <LinearProgress /> : ""}
+						<Paper square={true} className={classes.paper} elevation={2}>
+							<Grid container direction={"column"}>
+								<TextField
+									error={this.state.maxAgeChanged && !this.state.maxAgeValid}
+									name='maxAge'
+									onChange={this.handleChange}
+									className={classes.input}
+									label="Max Age"
+									size={"small"}
+									type="number"
+									variant="outlined" />
+								<TextField
+									error={this.state.locationChanged && !this.state.locationValid}
+									name='location'
+									onChange={this.handleChange}
+									className={classes.input}
+									label="Location"
+									size={"small"}
+									type="text"
+									variant="outlined" />
+								<FormControl error={this.state.animalChanged && !this.state.animalValid}
+											 size="small" variant="outlined" className={classes.input}>
+									<InputLabel>Animal</InputLabel>
+									<Select value={this.state.animal} defaultValue="" name="animal"
+											onChange={this.handleChange} label="Animal">
+										<MenuItem value="">
+											<em>None</em>
+										</MenuItem>
+										{this.getAnimalMenuItems(Object.keys(animals))}
+									</Select>
+								</FormControl>
+								<FormControl error={this.state.breedChanged && !this.state.breedValid} size="small"
+											 variant="outlined" className={classes.input}>
+									<InputLabel id="breed">Breed</InputLabel>
+									<Select value={this.state.breed} defaultValue="" name="breed" labelId="breed"
+											label="Breed" onChange={this.handleChange}>
+										<MenuItem value="">
+											<em>None</em>
+										</MenuItem>
+										{this.getBreedsMenuItems(animals)}
+									</Select>
+								</FormControl>
+								<Button onClick={this.submitForm} disabled={!this.isFormValid()} variant="contained"
+										color="primary">
+									Submit
+								</Button>
+							</Grid>
+						</Paper>
 					</Grid>
-				</Paper>
-			</Grid>
+				) :
+				<Grid container direction={"column"} justify={"center"} alignItems={"center"}>
+					<Typography color="textSecondary" variant="h5" component="h5">
+						Something went wrong! Try again later
+					</Typography>
+					<Typography variant={"overline"} component="h5">
+						{this.getErrorMessage()}
+					</Typography>
+					<IconButton aria-label="reload" onClick={this.reloadPage}>
+						<ReplayOutlinedIcon/>
+					</IconButton>
+
+				</Grid>
 		);
 	}
 }

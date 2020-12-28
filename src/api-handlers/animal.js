@@ -9,7 +9,7 @@ export async function sendSearchAnimalRequest(query) {
 		const res = await fetch(url);
 		return await res.json();
 	} catch(error) {
-		return error
+		throw(error.message);
 	}
 }
 
@@ -18,6 +18,6 @@ export async function sendGetAnimalsRequest() {
 		const res = await fetch(getAnimalsApiUrl);
 		return await res.json();
 	} catch(error) {
-		return error;
+		throw(error.message);
 	}
 }

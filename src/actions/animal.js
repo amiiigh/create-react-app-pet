@@ -25,7 +25,9 @@ export async function getAnimals(dispatch) {
 	dispatch(getAnimalsRequest());
 	try {
 		const res = await sendGetAnimalsRequest();
-		dispatch(getAnimalsSuccess(res));
+		setTimeout(()=> {
+			dispatch(getAnimalsSuccess(res));
+		}, 2000)
 	} catch(error) {
 		dispatch(getAnimalsFailure(error));
 	}
@@ -56,7 +58,9 @@ export async function searchAnimal(dispatch, query) {
 	dispatch(searchAnimalRequest(query));
 	try {
 		const res = await sendSearchAnimalRequest(query);
-		dispatch(searchAnimalSuccess(res));
+		setTimeout(()=>{
+			dispatch(searchAnimalSuccess(res));
+		},2000)
 	} catch(error) {
 		dispatch(searchAnimalFailure(error));
 	}
