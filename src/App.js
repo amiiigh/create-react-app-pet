@@ -1,25 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import SearchForm from "./components/SearchPage";
+import React, {useContext} from "react";
+import ResultsPage from "./components/ResultsPage";
+import Grid from "@material-ui/core/Grid";
+import DetailPage from "./components/DetailPage";
+import { StoreContext } from "./store";
+import { Navbar } from "./components/navbar";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    let page;
+    const {state} = useContext(StoreContext);
+    if (state.page === 'SEARCH') {
+        page = <SearchForm/>
+    } else if (state.page === 'RESULTS') {
+        page = <ResultsPage/>
+    } else if (state.page === 'DETAIL') {
+        page = <DetailPage/>
+    }
+
+    return (
+        <div className="App">
+            <Navbar/>
+            <Grid className="main-container" container justify="center" alignItems="center">
+                {page}
+            </Grid>
+        </div>
+    );
 }
 
 export default App;
