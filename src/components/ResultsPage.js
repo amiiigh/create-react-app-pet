@@ -22,7 +22,9 @@ export default function ResultsPage() {
 				{
 					searchResults.length !== 0 ?
 					searchResultsElements :
-					<Typography variant={"h5"} color={"textSecondary"} component={"h5"}> Sorry! We couldn't find any results</Typography>
+					<Typography variant={"h5"} color={"textSecondary"} component={"h5"}>
+						Sorry! We couldn't find any results
+					</Typography>
 				}
 			</Grid>
 		</Grid>

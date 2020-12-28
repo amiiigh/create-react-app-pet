@@ -62,11 +62,12 @@ export async function searchAnimal(dispatch, query) {
 	}
 }
 
-export function setCurrentAnimal(animal) {
-	return {
+export function setCurrentAnimal(dispatch, animal) {
+	const action = {
 		type: constants.SET_CURRENT_ANIMAL,
 		payload: { animal },
-	}
+	};
+	dispatch(action)
 }
 
 export function changePage(dispatch, page) {

@@ -1,13 +1,13 @@
 import React from 'react';
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { withStyles } from '@material-ui/core/styles';
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
+import Paper from "@material-ui/core/Paper";
+import { withStyles } from '@material-ui/core/styles';
+import Select from "@material-ui/core/Select";
+import TextField from "@material-ui/core/TextField";
+import InputLabel from "@material-ui/core/InputLabel";
 import {StoreContext} from "../store";
 import {getAnimals, searchAnimal} from "../actions/animal";
 
@@ -130,7 +130,8 @@ class SearchPage extends React.Component {
 							size={"small"}
 							type="text"
 							variant="outlined" />
-						<FormControl error={this.state.animalChanged && !this.state.animalValid} size="small" variant="outlined" className={classes.input}>
+						<FormControl error={this.state.animalChanged && !this.state.animalValid}
+									 size="small" variant="outlined" className={classes.input}>
 							<InputLabel>Animal</InputLabel>
 							<Select value={this.state.animal} defaultValue="" name="animal" onChange={this.handleChange} label="Animal">
 								<MenuItem value="">

@@ -59,7 +59,9 @@ export default function DetailPage(props) {
 				</Grid>
 				<Grid item xs={8}>
 					<Grid item container justify={"center"}>
-						<Button onClick={() => changePage(dispatch, 'RESULTS')} variant={"outlined"} >Back to results</Button>
+						<Button onClick={() => changePage(dispatch, 'RESULTS')} variant={"outlined"} >
+							Back to results
+						</Button>
 					</Grid>
 				</Grid>
 			</Grid>

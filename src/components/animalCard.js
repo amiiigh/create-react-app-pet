@@ -19,10 +19,10 @@ export default function AnimalCard(props) {
 		},
 	});
 	const classes = useStyles();
-	const {state, dispatch} = useStore();
+	const {dispatch} = useStore();
 	return(
 		<Card className={classes.root}>
-			<CardActionArea onClick={() => dispatch(setCurrentAnimal(props.animal))}>
+			<CardActionArea onClick={() => setCurrentAnimal(dispatch, props.animal)}>
 				<CardMedia
 					className={classes.media}
 					image={props.animal.picture}
