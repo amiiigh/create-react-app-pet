@@ -27,7 +27,7 @@ export async function getAnimals(dispatch) {
 		const res = await sendGetAnimalsRequest();
 		setTimeout(()=> {
 			dispatch(getAnimalsSuccess(res));
-		}, 2000)
+		}, 1500)
 	} catch(error) {
 		dispatch(getAnimalsFailure(error));
 	}
@@ -60,7 +60,7 @@ export async function searchAnimal(dispatch, query) {
 		const res = await sendSearchAnimalRequest(query);
 		setTimeout(()=>{
 			dispatch(searchAnimalSuccess(res));
-		},2000)
+		},1500)
 	} catch(error) {
 		dispatch(searchAnimalFailure(error));
 	}

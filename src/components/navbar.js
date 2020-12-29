@@ -4,12 +4,21 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import PetsIcon from '@material-ui/icons/Pets';
 import {useStore} from "../store";
 import {changePage} from "../actions/animal";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
 
 export const Navbar = () => {
+	const useStyles = makeStyles({
+		logo: {
+			margin: "0 10px",
+		}
+	});
+	const classes = useStyles();
 	const {state, dispatch} = useStore();
 	let buttons = "";
 	if (state.page === 'RESULTS') {
@@ -30,6 +39,15 @@ export const Navbar = () => {
 				</Button>
 			</Grid>
 
+	} else {
+		buttons =
+			<Grid container justify={"center"} alignItems={"center"} spacing={5}>
+				<PetsIcon/>
+				<Typography className={classes.logo}>
+					PET ADOPTION
+				</Typography>
+				<PetsIcon/>
+			</Grid>
 	}
 	return(
 		<AppBar position="static">
