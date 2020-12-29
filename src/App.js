@@ -1,11 +1,11 @@
 import './App.css';
-import SearchForm from "./components/SearchPage";
-import React, {useContext} from "react";
-import ResultsPage from "./components/ResultsPage";
-import Grid from "@material-ui/core/Grid";
-import DetailPage from "./components/DetailPage";
-import { StoreContext } from "./store";
-import { Navbar } from "./components/navbar";
+import SearchForm from './components/SearchPage';
+import React, {useContext} from 'react';
+import ResultsPage from './components/ResultsPage';
+import Grid from '@material-ui/core/Grid';
+import DetailPage from './components/DetailPage';
+import { StoreContext } from './store';
+import { Navbar } from './components/navbar';
 
 function App() {
     let page;
@@ -19,9 +19,9 @@ function App() {
     }
 
     return (
-        <div className="App">
+        <div className={"App"}>
             <Navbar/>
-            <Grid className="main-container" container justify="center" alignItems="center">
+            <Grid className={"main-container"} container justify={"center"} alignItems={"center"}>
                 {page}
             </Grid>
         </div>

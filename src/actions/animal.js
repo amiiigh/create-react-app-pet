@@ -1,5 +1,5 @@
-import * as constants from "../constants";
-import {sendGetAnimalsRequest, sendSearchAnimalRequest} from "../api-handlers/animal";
+import * as constants from '../constants';
+import {sendGetAnimalsRequest, sendSearchAnimalRequest} from '../api-handlers/animal';
 
 export function getAnimalsRequest() {
 	return {

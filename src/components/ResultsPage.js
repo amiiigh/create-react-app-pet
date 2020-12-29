@@ -1,8 +1,8 @@
-import Grid from "@material-ui/core/Grid";
-import React from "react";
-import AnimalCard from "./animalCard";
-import {useStore} from "../store";
-import Typography from "@material-ui/core/Typography";
+import Grid from '@material-ui/core/Grid';
+import React from 'react';
+import AnimalCard from './animalCard';
+import {useStore} from '../store';
+import Typography from '@material-ui/core/Typography';
 
 export default function ResultsPage() {
 	const {state} = useStore();
@@ -25,7 +25,7 @@ export default function ResultsPage() {
 	}
 	return (
 		<Grid item xs={10}>
-			<Grid justify="center" container spacing={2}>
+			<Grid justify={"center"} container spacing={2}>
 				{result}
 			</Grid>
 		</Grid>

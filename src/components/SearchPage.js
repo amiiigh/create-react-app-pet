@@ -1,19 +1,19 @@
 import React from 'react';
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import MenuItem from "@material-ui/core/MenuItem";
-import Typography from "@material-ui/core/Typography";
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
 import ReplayOutlinedIcon from '@material-ui/icons/ReplayOutlined';
-import IconButton from "@material-ui/core/IconButton";
-import Paper from "@material-ui/core/Paper";
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
-import InputLabel from "@material-ui/core/InputLabel";
-import {StoreContext} from "../store";
-import {getAnimals, searchAnimal} from "../actions/animal";
-import LinearProgress from "@material-ui/core/LinearProgress";
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import {StoreContext} from '../store';
+import {getAnimals, searchAnimal} from '../actions/animal';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const useStyles = theme => ({
 	paper: {
@@ -142,31 +142,31 @@ class SearchPage extends React.Component {
 								<TextField
 									disabled={this.isLoading()}
 									error={this.state.maxAgeChanged && !this.state.maxAgeValid}
-									name='maxAge'
+									name={'maxAge'}
 									onChange={this.handleChange}
 									className={classes.input}
-									label="Max Age"
+									label={"Max Age"}
 									size={"small"}
-									type="number"
-									variant="outlined" />
+									type={"number"}
+									variant={"outlined"} />
 								<TextField
 									disabled={this.isLoading()}
 									error={this.state.locationChanged && !this.state.locationValid}
-									name='location'
+									name={'location'}
 									onChange={this.handleChange}
 									className={classes.input}
-									label="Location"
+									label={"Location"}
 									size={"small"}
-									type="text"
-									variant="outlined" />
+									type={"text"}
+									variant={"outlined"} />
 								<FormControl disabled={this.isLoading()}
 											 error={this.state.animalChanged && !this.state.animalValid}
-											 size="small"
-											 variant="outlined"
+											 size={"small"}
+											 variant={"outlined"}
 											 className={classes.input}>
 									<InputLabel>Animal</InputLabel>
-									<Select value={this.state.animal} defaultValue="" name="animal"
-											onChange={this.handleChange} label="Animal">
+									<Select value={this.state.animal} defaultValue="" name={"animal"}
+											onChange={this.handleChange} label={"Animal"}>
 										<MenuItem value="">
 											<em>None</em>
 										</MenuItem>
@@ -175,20 +175,21 @@ class SearchPage extends React.Component {
 								</FormControl>
 								<FormControl disabled={this.isLoading()}
 											 error={this.state.breedChanged && !this.state.breedValid}
-											 size="small"
-											 variant="outlined"
+											 size={"small"}
+											 variant={"outlined"}
 											 className={classes.input}>
-									<InputLabel id="breed">Breed</InputLabel>
-									<Select value={this.state.breed} defaultValue="" name="breed" labelId="breed"
-											label="Breed" onChange={this.handleChange}>
+									<InputLabel id={"breed"}>Breed</InputLabel>
+									<Select value={this.state.breed} defaultValue="" name={"breed"} labelId={"breed"}
+											label={"Breed"} onChange={this.handleChange}>
 										<MenuItem value="">
 											<em>None</em>
 										</MenuItem>
 										{this.getBreedsMenuItems(animals)}
 									</Select>
 								</FormControl>
-								<Button onClick={this.submitForm} disabled={!this.isFormValid() || this.isLoading()} variant="contained"
-										color="primary">
+								<Button onClick={this.submitForm} disabled={!this.isFormValid() || this.isLoading()}
+										variant={"contained"}
+										color={"primary"}>
 									Submit
 								</Button>
 							</Grid>
@@ -196,13 +197,13 @@ class SearchPage extends React.Component {
 					</Grid>
 				) :
 				<Grid container direction={"column"} justify={"center"} alignItems={"center"}>
-					<Typography color="textSecondary" variant="h5" component="h5">
+					<Typography color={"textSecondary"} variant={"h5"} component={"h5"}>
 						Something went wrong! Try again later
 					</Typography>
-					<Typography variant={"overline"} component="h5">
+					<Typography variant={"overline"} component={"h5"}>
 						{this.getErrorMessage()}
 					</Typography>
-					<IconButton aria-label="reload" onClick={this.reloadPage}>
+					<IconButton aria-label={"reload"} onClick={this.reloadPage}>
 						<ReplayOutlinedIcon/>
 					</IconButton>
 				</Grid>

@@ -1,4 +1,4 @@
-import {getAnimalsApiUrl, searchAnimalApiUrl} from "../config/paths";
+import {getAnimalsApiUrl, searchAnimalApiUrl} from '../config/paths';
 
 export async function sendSearchAnimalRequest(query) {
 	try {
