@@ -29,7 +29,6 @@ class SearchPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isNotValid: true,
 			maxAgeChanged: false,
 			breedChanged: false,
 			animalChanged: false,

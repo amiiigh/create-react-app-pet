@@ -1,4 +1,4 @@
-import * as constants from '../constants';
+import * as constants from './actionTypes';
 import {sendGetAnimalsRequest, sendSearchAnimalRequest} from '../api-handlers/animal';
 
 export function getAnimalsRequest() {

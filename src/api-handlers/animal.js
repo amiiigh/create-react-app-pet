@@ -1,4 +1,4 @@
-import {getAnimalsApiUrl, searchAnimalApiUrl} from '../config/paths';
+import {getAnimalsApiUrl, searchAnimalApiUrl} from './paths';
 
 export async function sendSearchAnimalRequest(query) {
 	try {
@@ -7,6 +7,7 @@ export async function sendSearchAnimalRequest(query) {
 			url += q + '=' + query[q] + '&';
 		}
 		const res = await fetch(url);
+		// TODO response code
 		return await res.json();
 	} catch(error) {
 		throw(error.message);

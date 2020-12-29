@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Chip from '@material-ui/core/Chip';
 
+//TODO use hooks to get animal id from url to call the detail api
+
 export default function DetailPage(props) {
 	const {state} = useStore();
 	const animal = state.currentAnimal;

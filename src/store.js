@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react';
-import * as constants from './constants';
+import * as constants from './actions/actionTypes';
 
 export const StoreContext = createContext();
 const initialState = {

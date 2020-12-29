@@ -5,7 +5,7 @@ import ResultsPage from './components/ResultsPage';
 import Grid from '@material-ui/core/Grid';
 import DetailPage from './components/DetailPage';
 import { StoreContext } from './store';
-import { Navbar } from './components/navbar';
+import { Navbar } from './components/Navbar';
 
 function App() {
     let page;

@@ -1,7 +1,8 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
-import React from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -9,7 +10,8 @@ import {useStore} from '../store';
 import {setCurrentAnimal} from '../actions/animal';
 import Chip from '@material-ui/core/Chip';
 
-export default function AnimalCard(props) {
+//TODO check props
+export default function AnimalCard({ animal }) {
 	const useStyles = makeStyles({
 		root: {
 			width: 300,
@@ -20,29 +22,38 @@ export default function AnimalCard(props) {
 	});
 	const classes = useStyles();
 	const {dispatch} = useStore();
+	//TODO fix link
 	return(
 		<Card className={classes.root}>
-			<CardActionArea onClick={() => setCurrentAnimal(dispatch, props.animal)}>
+			<CardActionArea onClick={() => setCurrentAnimal(dispatch, animal)}>
 				<CardMedia
 					className={classes.media}
-					image={props.animal.picture}
-					title={props.animal.name}
+					image={animal.picture}
+					title={animal.name}
 				/>
 				<CardContent>
 					<Typography gutterBottom variant={"h5"} component={"h2"}>
-						{props.animal.name} <Chip variant={"outlined"} disabled size={"small"} label={props.animal.animal} />
+						{animal.name} <Chip variant={"outlined"} disabled size={"small"} label={animal.animal} />
 					</Typography>
 					<Typography variant={"overline"} component={"p"}>
-						Age: {props.animal.age}
+						Age: {animal.age}
 					</Typography>
 					<Typography variant={"overline"} component={"p"}>
-						Location: {props.animal.location}
+						Location: {animal.location}
 					</Typography>
 					<Typography variant={"overline"} component={"p"}>
-						Breed: {props.animal.breed}
+						Breed: {animal.breed}
 					</Typography>
 				</CardContent>
 			</CardActionArea>
 		</Card>
 	);
+}
+
+//TODO
+AnimalCard.propTypes = {
+	animal: PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		breed: PropTypes.string.isRequired,
+	}).isRequired
 }

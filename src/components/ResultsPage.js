@@ -1,6 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import React from 'react';
-import AnimalCard from './animalCard';
+import AnimalCard from './AnimalCard';
 import {useStore} from '../store';
 import Typography from '@material-ui/core/Typography';
 
