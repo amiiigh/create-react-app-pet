@@ -3,6 +3,9 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
+import Typography from "@material-ui/core/Typography";
+import ReplayOutlinedIcon from '@material-ui/icons/ReplayOutlined';
+import IconButton from "@material-ui/core/IconButton";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from '@material-ui/core/styles';
 import Select from "@material-ui/core/Select";
@@ -10,10 +13,7 @@ import TextField from "@material-ui/core/TextField";
 import InputLabel from "@material-ui/core/InputLabel";
 import {StoreContext} from "../store";
 import {getAnimals, searchAnimal} from "../actions/animal";
-import Typography from "@material-ui/core/Typography";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import ReplayOutlinedIcon from '@material-ui/icons/ReplayOutlined';
-import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = theme => ({
 	paper: {
@@ -57,11 +57,14 @@ class SearchPage extends React.Component {
 
 	handleChange = (e) => {
 		if (e.target.name === "animal") {
-			this.setState({ breed: ""});
+			this.setState({
+				breed: "",
+				breedValid: false,
+			});
 		}
 		this.setState({
 			[e.target.name] : e.target.value,
-			[e.target.name+'Changed']: true,
+			[e.target.name + 'Changed']: true,
 		}, () => this.validateInput(e.target.name));
 	};
 
@@ -120,8 +123,10 @@ class SearchPage extends React.Component {
 	getErrorMessage = () => {
 		if (this.context.state.fetchingAnimalsError !== "") {
 			return 'GET ANIMAL ' + this.context.state.fetchingAnimalsError;
-		} else if (this.context.state.searchError) {
+		} else if (this.context.state.searchError !== "") {
 			return 'SEARCH ' + this.context.state.searchError;
+		} else {
+			return ""
 		}
 	};
 
@@ -135,6 +140,7 @@ class SearchPage extends React.Component {
 						<Paper square={true} className={classes.paper} elevation={2}>
 							<Grid container direction={"column"}>
 								<TextField
+									disabled={this.isLoading()}
 									error={this.state.maxAgeChanged && !this.state.maxAgeValid}
 									name='maxAge'
 									onChange={this.handleChange}
@@ -144,6 +150,7 @@ class SearchPage extends React.Component {
 									type="number"
 									variant="outlined" />
 								<TextField
+									disabled={this.isLoading()}
 									error={this.state.locationChanged && !this.state.locationValid}
 									name='location'
 									onChange={this.handleChange}
@@ -152,8 +159,11 @@ class SearchPage extends React.Component {
 									size={"small"}
 									type="text"
 									variant="outlined" />
-								<FormControl error={this.state.animalChanged && !this.state.animalValid}
-											 size="small" variant="outlined" className={classes.input}>
+								<FormControl disabled={this.isLoading()}
+											 error={this.state.animalChanged && !this.state.animalValid}
+											 size="small"
+											 variant="outlined"
+											 className={classes.input}>
 									<InputLabel>Animal</InputLabel>
 									<Select value={this.state.animal} defaultValue="" name="animal"
 											onChange={this.handleChange} label="Animal">
@@ -163,8 +173,11 @@ class SearchPage extends React.Component {
 										{this.getAnimalMenuItems(Object.keys(animals))}
 									</Select>
 								</FormControl>
-								<FormControl error={this.state.breedChanged && !this.state.breedValid} size="small"
-											 variant="outlined" className={classes.input}>
+								<FormControl disabled={this.isLoading()}
+											 error={this.state.breedChanged && !this.state.breedValid}
+											 size="small"
+											 variant="outlined"
+											 className={classes.input}>
 									<InputLabel id="breed">Breed</InputLabel>
 									<Select value={this.state.breed} defaultValue="" name="breed" labelId="breed"
 											label="Breed" onChange={this.handleChange}>
@@ -174,7 +187,7 @@ class SearchPage extends React.Component {
 										{this.getBreedsMenuItems(animals)}
 									</Select>
 								</FormControl>
-								<Button onClick={this.submitForm} disabled={!this.isFormValid()} variant="contained"
+								<Button onClick={this.submitForm} disabled={!this.isFormValid() || this.isLoading()} variant="contained"
 										color="primary">
 									Submit
 								</Button>
@@ -192,7 +205,6 @@ class SearchPage extends React.Component {
 					<IconButton aria-label="reload" onClick={this.reloadPage}>
 						<ReplayOutlinedIcon/>
 					</IconButton>
-
 				</Grid>
 		);
 	}
